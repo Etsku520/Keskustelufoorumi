@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Messages</h1>
+    {% for message in messages %}
+    <p>{{ message.text }}
+        &nbsp; | Viimeksi muutettu: {{ message.date_modified }}
+    </p>
+    <p><form method="GET" action="{{ url_for('modify_message_form', message_id=message.id) }}">
+        <input type="submit" value="Modify the message"/>
+      </form>
+    </p>
+    {% endfor %}
+    <h2>Here is a button for making new messages. Why they aren't comments? Because I say so</h2>
+    <form method="GET" action="{{ url_for('message_form') }}">
+        <input type="submit" value="Make a new message"/>
+    </form>
+{% endblock %}

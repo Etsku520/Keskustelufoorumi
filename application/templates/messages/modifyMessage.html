@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" id="modifiedMessage">
+  <textarea rows="4" cols="50" name="text" form="modifiedMessage">{{oldMessage}}</textarea>
+  <p></p>
+  <input type="submit" value="update the message"/>
+</form>
+
+
+{% endblock %}
