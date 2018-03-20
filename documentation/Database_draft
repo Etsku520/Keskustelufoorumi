@@ -1,0 +1,8 @@
+[User]
+[Message]
+[Category]
+[MessageLink]
+
+[User]-[Message]
+[Message]-[MessageLink]
+[MessageLink]-[Category]
