@@ -8,5 +8,9 @@ class Message(db.Model):
 
     text = db.Column(db.String(10000), nullable=False)
 
-    def __init__(self, text):
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
+                           nullable = False)
+
+    def __init__(self, text, account_id):
         self.text = text
+        self.account_id = account_id

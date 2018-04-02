@@ -6,6 +6,14 @@
   </head>
 
   <body>
+    {% if current_user.is_authenticated %}
+    <p>
+     <b> Current user: </b> {{ current_user.name }} <a href="{{ url_for('auth_logout') }}"> logout </a>
+    </p>
+    {% else %}
+    <a href="{{ url_for('auth_login') }}"> login </a>
+    {% endif %}
+
     <p><a href="/">Hello page</a></p>
 
     {% block body %}
