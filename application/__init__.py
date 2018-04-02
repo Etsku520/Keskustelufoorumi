@@ -44,3 +44,4 @@ try:
     db.create_all()
 except:
     pass
+
