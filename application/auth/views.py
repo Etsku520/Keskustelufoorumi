@@ -20,10 +20,14 @@ def auth_login():
     if not user:
         return render_template("auth/loginform.html", form = form,
                                error = "No such username or password")
-    
-    if not user.check_password(form.password.data):
+
+    if not user.password == form.password.data:
         return render_template("auth/loginform.html", form = form,
                                error = "No such username or password")
+    
+    #if not user.check_password(form.password.data):
+    #    return render_template("auth/loginform.html", form = form,
+    #                           error = "No such username or password")
 
 
     login_user(user)
@@ -51,7 +55,8 @@ def auth_register():
                                form = form)
 
     u = User(form.name.data, form.username.data,
-             bcrypt.generate_password_hash(form.password.data))
+             #bcrypt.generate_password_hash(form.password.data))
+             form.password.data)
 
     if does_exist_name(u):
         error = "name is laready taken"
