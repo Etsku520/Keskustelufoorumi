@@ -1,4 +1,4 @@
-from application  import db
+from application  import db, bcrypt
 
 class User(db.Model):
 
@@ -31,3 +31,6 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+
+    def check_password(self, plaintext):
+        return bcrypt.check_password_hash(self.password, plaintext)

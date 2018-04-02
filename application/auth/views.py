@@ -21,7 +21,7 @@ def auth_login():
         return render_template("auth/loginform.html", form = form,
                                error = "No such username or password")
     
-    if not bcrypt.check_password_hash(user.password, form.password.data):
+    if not user.check_password(form.password.data):
         return render_template("auth/loginform.html", form = form,
                                error = "No such username or password")
 
