@@ -1,4 +1,5 @@
 from application  import db, bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property
 
 class User(db.Model):
 
