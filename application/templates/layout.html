@@ -12,6 +12,7 @@
     </p>
     {% else %}
     <a href="{{ url_for('auth_login') }}"> login </a>
+    <a href="{{ url_for('auth_register') }}"> register </a>
     {% endif %}
 
     <p><a href="{{ url_for('hello') }}">Hello page</a></p>

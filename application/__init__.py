@@ -2,6 +2,7 @@ from flask import Flask
 app = Flask(__name__)
 
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
 import os
 
@@ -10,6 +11,9 @@ if os.environ.get("HEROKU"):
 else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///forum.db"
     app.config["SQLALCHEMY_ECHO"] = True
+
+#I try to remember to use 12x crypting
+bcrypt = Bcrypt(app)
 
 db = SQLAlchemy(app)
 

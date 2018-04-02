@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 
-from application import app, db
+from application import app, db, bcrypt
 from application.messages.models import Message
 from application.messages.forms import MessageForm
 
