@@ -11,6 +11,5 @@ class Message(db.Model):
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
                            nullable = False)
 
-    def __init__(self, text, account_id):
+    def __init__(self, text):
         self.text = text
-        self.account_id = account_id
