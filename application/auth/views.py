@@ -41,8 +41,6 @@ def auth_register():
                                form = RegisterationForm())
     form = RegisterationForm(request.form)
 
-    print(form.password.data + " " +  form.repeat.data)
-
     if form.password.data != form.repeat.data:
         error = "Passwords and repeat didn't match"
         return render_template("auth/registerationform.html", error = error,
