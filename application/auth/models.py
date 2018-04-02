@@ -12,7 +12,7 @@ class User(db.Model):
 
     name = db.Column(db.String(144), unique=True, nullable=False)
     username = db.Column(db.String(144), unique=True, nullable=False)
-    password = db.Column(db.String(144), nullable=False)
+    password = db.Column(db.String(144))
 
     messages = db.relationship("Message", backref='account', lazy=True)
 
