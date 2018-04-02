@@ -12,11 +12,11 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///forum.db"
     app.config["SQLALCHEMY_ECHO"] = True
 
-
 bcrypt = Bcrypt(app)
 
 db = SQLAlchemy(app)
 
+from multiprocessing.util import register_after_fork
 from application import hello
 
 from application.messages import models
