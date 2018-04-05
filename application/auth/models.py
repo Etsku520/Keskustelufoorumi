@@ -35,4 +35,4 @@ class User(db.Model):
         return True
 
     def check_password(self, plaintext):
-        return bcrypt.checkpw(plaintext.encode(), self.password)
+        return bcrypt.checkpw(plaintext.encode(), self.password.decrypt('utf-8')
