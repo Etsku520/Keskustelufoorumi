@@ -52,7 +52,7 @@ def auth_register():
                                form = form)
 
     u = User(form.name.data, form.username.data,
-             bcrypt.hashpw(form.password.data.encode(), bcrypt.gensalt()))
+             bcrypt.hashpw(form.password.data.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'))
 
     if does_exist_name(u):
         error = "name is laready taken"
