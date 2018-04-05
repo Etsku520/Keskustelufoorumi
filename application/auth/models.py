@@ -20,6 +20,7 @@ class User(db.Model):
         self.name = name
         self.username = username
         self.password = password
+        print(type(password))
   
     def get_id(self):
         return self.id
@@ -34,4 +35,4 @@ class User(db.Model):
         return True
 
     def check_password(self, plaintext):
-        return bcrypt.check_password_hash(self.password, plaintext)
+        return bcrypt.checkpw(plaintext.encode(), self.password)
