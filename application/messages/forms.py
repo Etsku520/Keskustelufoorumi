@@ -7,3 +7,8 @@ class MessageForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class GroupForm(FlaskForm):
+    heading = StringField("Heading", [validators.Length(min=4)])
+    class Meta:
+        csrf = False

@@ -1,23 +1,24 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+from sqlalchemy.sql import text
 
 from application import app, db
-from application.messages.models import Message
-from application.messages.forms import MessageForm
+from application.messages.models import Message, Group
+from application.messages.forms import MessageForm, GroupForm
 
 
 @app.route("/messages")
 def all_messages():
     return render_template("messages/messages.html", messages = Message.query.all())
 
-@app.route("/new/message")
+@app.route("/new/<group_id>/message")
 @login_required
-def message_form():
-    return render_template("messages/newMessage.html", form = MessageForm())
+def message_form(group_id):
+    return render_template("messages/newMessage.html", form = MessageForm(), group_id=group_id)
 
 @app.route("/messages/<message_id>/")
 @login_required
-def modify_message_form(message_id):
+def modify_message_form( message_id):
     m = Message.query.get(message_id).text
     form = MessageForm()
     form.name.default = m
@@ -39,17 +40,71 @@ def modify_message(message_id):
 
     return redirect(url_for("all_messages"))
 
-@app.route("/new/message", methods=["POST"])
+@app.route("/new/<group_id>/message", methods=["POST"])
 @login_required
-def message_new():
+def message_new(group_id):
     form = MessageForm(request.form)
     if not form.validate():
         return render_template("messages/newMessage.html", form = form)
         
     m = Message(form.name.data)
     m.account_id = current_user.id
+    m.group_id = group_id
 
     db.session().add(m)
     db.session().commit()
 
-    return redirect(url_for("all_messages"))
+    return redirect(url_for("group_messages", group_id=group_id))
+
+@app.route("/new/group")
+@login_required
+def group_form():
+    return render_template("messages/newGroup.html", form = GroupForm())
+
+@app.route("/new/group", methods=["POST"])
+@login_required
+def group_new():
+    form = GroupForm(request.form)
+    if not form.validate():
+        return render_template("messages/newGroup.html", form = form)
+    
+    g = Group(form.heading.data)
+    g.account_id = current_user.id
+    db.session().add(g)
+    db.session().commit()
+
+    return redirect(url_for("all_groups"))
+
+@app.route("/groups")
+def all_groups():
+    return render_template("messages/groups.html", groups = Group.query.all())
+
+@app.route("/groups/<group_id>/modify", methods=["POST"])
+@login_required
+def modify_group(group_id):
+    form = GroupForm(request.form)
+
+    if not form.validate():
+        return render_template("messages/modifyGroup.html", form = form)
+    
+    g = Group.query.get(group_id)
+    g.heading = form.heading.data
+    db.session.commit()
+
+    return redirect(url_for("all_groups"))
+
+@app.route("/groups/<group_id>/modify")
+@login_required
+def modify_group_form(group_id):
+    g = Group.query.get(group_id).heading
+    form = GroupForm()
+    form.heading.default = g
+    form.process()
+
+    return render_template("messages/modifyGroup.html", form = form)
+
+@app.route("/groups/<group_id>/")
+def group_messages(group_id):
+    messages = Group.findMessagesByGroup(group_id)
+    return render_template("messages/messages.html", messages = messages, group_id=group_id)
+

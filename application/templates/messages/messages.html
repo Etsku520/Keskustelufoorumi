@@ -12,7 +12,7 @@
     </p>
     {% endfor %}
     <h2>Here is a button for making new messages. Why they aren't comments? Because I say so</h2>
-    <form method="GET" action="{{ url_for('message_form') }}">
+    <form method="GET" action="{{ url_for('message_form', group_id= group_id) }}">
         <input type="submit" value="Make a new message"/>
     </form>
 {% endblock %}

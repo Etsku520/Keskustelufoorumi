@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Groups</h1>
+    {% for group in groups %}
+    <p><a href="{{ url_for('group_messages', group_id= group.id) }}"> {{ group.heading }} </a>
+        &nbsp; | Latest edit: {{ group.date_modified }}
+    </p>
+    <p><form method="GET" action="{{ url_for('modify_group_form', group_id=group.id) }}">
+        <input type="submit" value="Modify the group"/>
+      </form>
+    </p>
+    {% endfor %}
+    <h2>Make a new group here. Right now</h2>
+    <form method="GET" action="{{ url_for('group_form') }}">
+        <input type="submit" value="Make a new group"/>
+    </form>
+{% endblock %}

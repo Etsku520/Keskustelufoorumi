@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('message_new') }}" id="newMessage">
+<form method="POST" action="{{ url_for('message_new', group_id= group_id) }}" id="newMessage">
   <table>
    <tr>
     <td>
