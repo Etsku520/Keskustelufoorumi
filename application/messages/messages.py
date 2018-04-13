@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from sqlalchemy.sql import text
 
 from application import app, db
-from application.messages.models import Message, Group
+from application.messages.models import Message, Groups
 from application.messages.forms import MessageForm, GroupForm
 
 
@@ -77,7 +77,7 @@ def group_new():
 
 @app.route("/groups")
 def all_groups():
-    return render_template("messages/groups.html", groups = Group.query.all())
+    return render_template("messages/groups.html", groups = Groups.query.all())
 
 @app.route("/groups/<group_id>/modify", methods=["POST"])
 @login_required

@@ -7,17 +7,17 @@ class Message(Base):
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable = False)
 
-    group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable = False)
+    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable = False)
 
     def __init__(self, text):
         self.text = text
 
-class Group(Base):
+class Groups(Base):
     heading = db.Column(db.String(20), nullable=False)
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable = False)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    messages = db.relationship("Message", backref='Group', lazy=True)
+    messages = db.relationship("Message", backref='Groups', lazy=True)
 
     def __init__(self, heading):
         self.heading = heading
@@ -34,7 +34,7 @@ class Group(Base):
         return response
 
 class GroupCategory(Base):
-    group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable = False)
+    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable = False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable = False)
 
 
