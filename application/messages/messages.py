@@ -68,7 +68,7 @@ def group_new():
     if not form.validate():
         return render_template("messages/newGroup.html", form = form)
     
-    g = Group(form.heading.data)
+    g = Groups(form.heading.data)
     g.account_id = current_user.id
     db.session().add(g)
     db.session().commit()
@@ -87,7 +87,7 @@ def modify_group(group_id):
     if not form.validate():
         return render_template("messages/modifyGroup.html", form = form)
     
-    g = Group.query.get(group_id)
+    g = Groups.query.get(group_id)
     g.heading = form.heading.data
     db.session.commit()
 
@@ -96,7 +96,7 @@ def modify_group(group_id):
 @app.route("/groups/<group_id>/modify")
 @login_required
 def modify_group_form(group_id):
-    g = Group.query.get(group_id).heading
+    g = Groups.query.get(group_id).heading
     form = GroupForm()
     form.heading.default = g
     form.process()
@@ -105,6 +105,6 @@ def modify_group_form(group_id):
 
 @app.route("/groups/<group_id>/")
 def group_messages(group_id):
-    messages = Group.findMessagesByGroup(group_id)
+    messages = Groups.findMessagesByGroup(group_id)
     return render_template("messages/messages.html", messages = messages, group_id=group_id)
 

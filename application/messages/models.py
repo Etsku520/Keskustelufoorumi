@@ -24,7 +24,7 @@ class Groups(Base):
 
     @staticmethod
     def findMessagesByGroup(group_id):
-        stmt = text("SELECT DISTINCT Message.text, Message.account_id, Message.group_id, Message.id, Message.date_created, Message.date_modified FROM Group, Message WHERE Message.group_id = :id").params(id = group_id)
+        stmt = text("SELECT DISTINCT Message.text, Message.account_id, Message.group_id, Message.id, Message.date_created, Message.date_modified FROM Groups, Message WHERE Message.group_id = :id").params(id = group_id)
         res = db.engine.execute(stmt)
 
         response = []
