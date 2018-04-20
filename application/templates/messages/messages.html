@@ -1,17 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <h1>Messages</h1>
+    <h1>{{ g.heading }}</h1>
+
+
     {% for message in messages %}
-    <p>{{ message.text }}
-        &nbsp; | Viimeksi muutettu: {{ message.date_modified }}
-    </p>
-    <p><form method="GET" action="{{ url_for('modify_message_form', message_id=message.id) }}">
-        <input type="submit" value="Modify the message"/>
-      </form>
+    <p><b>{{ ug.get_account(message.account_id).name }}</b>: {{ message.text }}
+        &nbsp; | Latest edit: {{ message.date_modified }} &nbsp; 
+        {% if current_user.id == message.account_id %}
+        <a href="{{ url_for('modify_message_form', message_id=message.id) }}">edit</a>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        {% if current_user.id == message.account_id or current_user.get_role().role == "ADMIN" %}
+        <a href="{{ url_for('delete_message', message_id=message.id) }}">delete</a>
+        {% endif %}
+        {% endif %}
     </p>
     {% endfor %}
-    <h2>Here is a button for making new messages. Why they aren't comments? Because I say so</h2>
+    <b>Here is a button for making new messages. Why they aren't comments? Because I say so</b>
     <form method="GET" action="{{ url_for('message_form', group_id= group_id) }}">
         <input type="submit" value="Make a new message"/>
     </form>
