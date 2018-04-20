@@ -128,6 +128,9 @@ def group_messages(group_id):
 def delete_group(group_id):
     g = Groups.query.get(group_id)
     if g.account_id == current_user.id or current_user.get_role().role == "ADMIN":
+        messages  = g.messages
+        for message in messages:
+            db.session.delete(message)
         db.session.delete(g)
         db.session.commit()
 
