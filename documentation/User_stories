@@ -13,13 +13,19 @@ Käyttäjänä muut kuin ylläpitäjät eivät voi vaikuttaa omiin viesteihini
 
 Admin pystyy lisäämään admineita ja tekemään kategorioita
 
+Ryhmiin voi lisätä kategorioita
+
+Kategorian avulla voi etsiä ryhmiä
+
+Ryhmistä voi poistaa kategorioita
+
+Ryhmän poistuessa myös sen avaimeen liitetyt kategoriat poistuvat
+
+Kategoriat näkyvät kun ryhmä on avattu
+
 Tulevaa:
 
-Ylläpitäjänä/käyttäjänä pystyn vaikuttamaan ketjun kategorioihin
-
-Ryhmiin voidaan lisätä kaetgorioita
-
-Ryhmia voidaan etsiä kategorioiden mukaan
+Saa nähä ehtiikö oikeesti tehä mitään erityisiä kirja ominaisuuksia et saattaa vaan jäädä keskusteluille kirjoista :)
 
 Käyttäjänä pystyn laittamaan kirjan sivulle ja sen osat voidaan löytää yhdessä (paloittain kirjan lisääminen).
 

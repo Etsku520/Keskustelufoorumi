@@ -27,12 +27,26 @@ class Groups(Base):
 
     @staticmethod
     def findMessagesByGroup(group_id):
-        stmt = text("SELECT DISTINCT Message.text, Message.account_id, Message.group_id, Message.id, Message.date_created, Message.date_modified FROM Groups, Message WHERE Message.group_id = :id").params(id = group_id)
+
+        stmt = text(
+            "SELECT DISTINCT Message.text, Message.account_id, Message.group_id, Message.id, Message.date_created, Message.date_modified FROM Groups, Message WHERE Message.group_id = :id ORDER BY message.date_created").params(id = group_id)
         res = db.engine.execute(stmt)
 
         response = []
         for row in res:
             response.append({"id":row[3], "text":row[0], "account_id":row[1], "group_id":row[2], "date_created":row[4], "date_modified":row[5]})
+
+        return response
+
+    def categories(group_id):
+        stmt = text(
+            "SELECT DISTINCT Category.id, Category.name FROM Groups, Group_category, Category WHERE Category.id = Group_category.category_id AND Group_category.group_id = :id").params(id = group_id)
+
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1]})
 
         return response
 

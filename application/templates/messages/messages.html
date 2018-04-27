@@ -2,8 +2,15 @@
 
 {% block body %}
     <h1>{{ g.heading }}</h1>
-
-
+    <p>
+    {% for category in categories %}
+    {{ category.name }}, 
+    {% endfor %}
+    </p>
+    
+    <p>
+        -----------------
+    </p>
     {% for message in messages %}
     <p><b>{{ ug.get_account(message.account_id).name }}</b>: {{ message.text }}
         &nbsp; | Latest edit: {{ message.date_modified }} &nbsp; 
