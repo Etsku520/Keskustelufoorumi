@@ -1,28 +1,45 @@
 # Tietokantarakenne
 ## Tietokantataulu
 ![](Tietokantakaavio.png)
+
 Tietokanta ei ole täysin normalisoitu, koska käyttäjällä lähes kaikki on uniikkia ja käytin samaa pohjaa kaikille jossa pääavaimena on id, myös kirjan nimi on uniikki ja sillä on id samasta pohjasta.
 
 ## Tietokannan pöytien luonti
 CREATE TABLE category (
-	id INTEGER NOT NULL, 
-	date_created DATETIME, 
-	date_modified DATETIME, 
-	name VARCHAR(15) NOT NULL, 
-	PRIMARY KEY (id), 
-	UNIQUE (name)
+
+   id INTEGER NOT NULL, 
+
+   date_created DATETIME, 
+
+   date_modified DATETIME, 
+
+   name VARCHAR(15) NOT NULL, 
+
+   PRIMARY KEY (id), 
+
+   UNIQUE (name)
 );
+
 CREATE TABLE role (
-	id INTEGER NOT NULL, 
-	date_created DATETIME, 
-	date_modified DATETIME, 
-	role VARCHAR(80) NOT NULL, 
-	PRIMARY KEY (id), 
-	UNIQUE (role)
+
+   id INTEGER NOT NULL, 
+ 
+   date_created DATETIME, 
+
+   date_modified DATETIME, 
+
+   role VARCHAR(80) NOT NULL, 
+
+   PRIMARY KEY (id), 
+
+   UNIQUE (role)
+   
 );
 CREATE TABLE account (
-	id INTEGER NOT NULL, 
-	date_created DATETIME, 
+
+   id INTEGER NOT NULL, 
+	
+   date_created DATETIME, 
 	date_modified DATETIME, 
 	name VARCHAR(144) NOT NULL, 
 	username VARCHAR(144) NOT NULL, 
