@@ -66,6 +66,10 @@ from application.auth import views
 
 from application.management import views
 
+from application.groups import views
+from application.groups import models
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)

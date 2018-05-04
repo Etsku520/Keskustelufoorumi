@@ -1,10 +1,12 @@
 # Keskustelufoorumi
 Harjoitustyö, kirjafoorumi
 
-Trakoituskena on tehdä foorumi johon voi lisätä omia kirjoja. Ei kai siinä mitään sen ihmeellisempää
+Kaunis foorumi jossa käyttäjät voivat luoda ryhmiä (jotka toimivat kuin viestiketjut), sekä kirjoittaa viestejä eri ryhmiin. Ryhmät on eritelty kategorioihin ja niitä voi etsiä kategorian mukaan.
 
 [Heroku sovellus](https://kirjafoorumi-harjoitus.herokuapp.com/)
 
 [User stories](https://github.com/Etsku520/Keskustelufoorumi/blob/master/documentation/User_stories)
 
-[Database Draft](https://github.com/Etsku520/Keskustelufoorumi/blob/master/documentation/Database_draft)
+[Tietokantarakenteet](https://github.com/Etsku520/Keskustelufoorumi/blob/master/documentation/tietokantarakenne)
+
+[Omia kokemuskia](https://github.com/Etsku520/Keskustelufoorumi/blob/master/documentation/kokemuksia)

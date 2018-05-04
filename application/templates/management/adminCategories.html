@@ -7,7 +7,10 @@
 <h2>Categories</h2>
 {% for category in categories %}
 <p>
-    {{ category.name }} | created: {{ category.date_created}}
+    <form action="{{ url_for('delete_category', category_id=category.id) }}" method="POST" style="display: inline;">
+        {{ category.name }} | created: {{ category.date_created}}
+        <button style="width: 60px; height: 30px; color: red; background-color:white; display: inline;" type='submit' name='delete'>delete</button>
+    </form>
 </p>
 {% endfor %}
 <h2>Make category</h2>

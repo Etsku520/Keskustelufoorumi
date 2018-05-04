@@ -3,10 +3,12 @@ from flask_login import current_user
 from sqlalchemy.sql import text
 
 from application import app, db, login_required
-from application.messages.models import Message, Groups, Category
-from application.messages.forms import MessageForm, GroupForm
+from application.messages.models import Message
+from application.messages.forms import MessageForm
 from application.auth.models import Role, User
 from application.management.forms import CategoryForm
+from application.groups.forms import GroupForm, GroupcategoryFrom
+from application.groups.models import Groups, GroupCategory, Category
 
 @app.route("/mypage")
 @login_required()
@@ -50,6 +52,44 @@ def admin_categories():
     db.session().commit()
 
     return redirect(url_for("admin_categories"))
+
+@app.route("/categories/<category_id>/delete", methods=["POST"])
+@login_required(role="ADMIN")
+def delete_category(category_id):
+    c = Category.query.get(category_id)
+    gcs = GroupCategory.query.filter_by(category_id = category_id)
+
+    for gc in gcs:
+        db.session().delete(gc)
+
+    db.session().delete(c)
+    db.session().commit()
+
+    return redirect(url_for("admin_categories"))
+
+@app.route("/users/<user_id>/delete", methods=["POST"])
+@login_required(role="ADMIN")
+def delete_user(user_id):
+    u = User.query.get(user_id)
+    if u.get_role().role != "ADMIN":
+        gs = u.groups
+        for g in gs:
+            messages = g.messages
+            gcs = GroupCategory.query.filter_by(group_id = g.id)
+            for message in messages:
+                db.session.delete(message)
+            for gc in gcs:
+                db.session.delete(gc)
+            db.session.delete(g)
+        
+        messages = u.messages
+        for message in messages:
+            db.session().delete(message)
+
+        db.session().delete(u)
+        db.session().commit()
+
+    return redirect(url_for("admin_users"))
 
     
 def category_exists(name):

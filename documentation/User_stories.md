@@ -31,4 +31,11 @@ Käyttäjänä pystyn laittamaan kirjan sivulle ja sen osat voidaan löytää yh
 
 Varmaa jotai vielä mut ei tuu mitää mielee, enkä ees tiiä pitikö laittaa muutaku ne jotka on jo tehty.
 
+## Jotai SQL ku niit?ki pyydettiin (vaikka en ymm?rr? miss? maailmassa jokaiseen user storyyn voi lis?t? j?rkev?n sql kyselyn
+SQL kyselyt tekee p??osin SQLalchemy, muutta täs on muutama
 
+Kaikki viestit ryhmästä: "SELECT DISTINCT Message.text, Message.account_id, Message.group_id, Message.id, Message.date_created, Message.date_modified FROM Groups, Message WHERE Message.group_id = :id ORDER BY message.date_created"
+
+Ryhmän categoriat: "SELECT DISTINCT Category.id, Category.name FROM Groups, Group_category, Category WHERE Category.id = Group_category.category_id AND Group_category.group_id = :id"
+
+Categoriat jotka eivät ole ryhmässä: "SELECT * FROM Category WHERE category.id NOT IN (SELECT category.id FROM Category, group_category WHERE category.id = Group_category.category_id AND Group_category.group_id = :id"

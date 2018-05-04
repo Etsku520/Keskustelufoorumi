@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .comment {
+        border: 1px double blue;
+        width: 800px;
+        padding: 5px;
+        background-color: rgb(204, 204, 204);
+        white-space: pre-line;
+        word-wrap: break-word;
+      }
+      
+      .blue {
+        color: rgb(0, 110, 255);
+        padding: 8px;
+      }
+    </style>
     <meta charset="utf-8">
     <title>Forum</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -9,7 +24,7 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="#">Kirjafoorumi</a>
+      <a class="navbar-brand" href="{{ url_for('hello') }}">Kirjafoorumi</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,18 +45,14 @@
               {% endif %}
             </ul>
             <div class="form-inline mt-2 mt-md-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('group_search') }}">search</a>
-                </li>
+              <a class="blue" href="{{ url_for('group_search') }}">search</a>
               {% if current_user.is_authenticated %}
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('my_page') }}">my page</a>
-              </li>
-              <a href="{{ url_for('auth_logout') }}"> {{ current_user.name }} -- Logout</a>
+              <a class="blue" href="{{ url_for('my_page') }}">my page</a>
+              <a class="blue" href="{{ url_for('auth_logout') }}"> {{ current_user.name }} -- Logout</a>
               {% else %}
-                <a href="{{ url_for('auth_login') }}"> login -</a>
+                <a class="blue" href="{{ url_for('auth_login') }}">login</a>
                 <a></a>
-                <a href="{{ url_for('auth_register') }}"> - register </a>
+                <a class="blue" href="{{ url_for('auth_register') }}">register </a>
               {% endif %}
             </div>
           </div>
